@@ -96,48 +96,48 @@ Este projeto é para o desenvolvimento de uma rede social simples em que um usu�
 
 ## Quais os itens a serem estudados com o desenvolvimento deste projeto?
 
-1 - Instalação do [Bootstrap](https://laravel.com/docs/6.x/frontend) no projeto;
+01 - Instalação do [Bootstrap](https://laravel.com/docs/6.x/frontend) no projeto;
 
-2 - [Authentication](https://laravel.com/docs/10.x/authentication)) do Laravel;
+02 - [Authentication](https://laravel.com/docs/10.x/authentication)) do Laravel;
 
-3 - [Relacionamentos](https://laravel.com/docs/10.x/eloquent-relationships) entre tabelas/models;
+03 - [Relacionamentos](https://laravel.com/docs/10.x/eloquent-relationships) entre tabelas/models;
 
-4 - [Livewire](https://laravel-livewire.com/) - Para criação de componentes que são sincronizados entre o front-end e o back-end.;
+04 - [Livewire](https://laravel-livewire.com/) - Para criação de componentes que são sincronizados entre o front-end e o back-end.;
 
-5 - [Paginação](https://laravel.com/docs/10.x/eloquent-resources#pagination) no Laravel;
+05 - [Paginação](https://laravel.com/docs/10.x/eloquent-resources#pagination) no Laravel;
 
-6 - [Paginação](https://laravel-livewire.com/docs/2.x/pagination) com Livewire.
+06 - [Paginação](https://laravel-livewire.com/docs/2.x/pagination) com Livewire.
 
 
 ## Como colocar a funcionar o projeto?
 
-1 - pelo terminal, acesse a pasta onde você deseja salvar o projeto
+01 - pelo terminal, acesse a pasta onde você deseja salvar o projeto
 
 
-2 - clone o projeto para a sua  máquina
+02 - clone o projeto para a sua  máquina
 
 >    git clone https://github.com/tiagoriosrocha/rede-social-laravel.git
 
-3 - acesse a pasta do projeto
+03 - acesse a pasta do projeto
 
 >    cd rede-social-laravel
 
-4 - crie o arquivo .env
+04 - crie o arquivo .env
 
 >    cp .env.example .env
 
-5 - gere a chave do projeto
+05 - gere a chave do projeto
 
 >    php artisan key:generate
 
-6 - crie um arquivo vazio para armazenar o banco de dados
+06 - crie um arquivo vazio para armazenar o banco de dados
 
 >    touch database/database.sqlite
 
-7 - execute o comando para criar as tabelas e inserir dados dos seed e factory
+07 - execute o comando para criar as tabelas e inserir dados dos seed e factory
 
 >    php artisan migrate:fresh --seed
 
-8 - coloque o projeto para rodar
+08 - coloque o projeto para rodar
 
 >    php artisan serve
