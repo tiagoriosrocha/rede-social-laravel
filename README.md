@@ -116,28 +116,28 @@ Este projeto é para o desenvolvimento de uma rede social simples em que um usu�
 
 2 - clone o projeto para a sua  máquina
 
----    git clone https://github.com/tiagoriosrocha/rede-social-laravel.git
+>    git clone https://github.com/tiagoriosrocha/rede-social-laravel.git
 
 3 - acesse a pasta do projeto
 
----    cd rede-social-laravel
+>    cd rede-social-laravel
 
 4 - crie o arquivo .env
 
----    cp .env.example .env
+>    cp .env.example .env
 
 5 - gere a chave do projeto
 
----    php artisan key:generate
+>    php artisan key:generate
 
 6 - crie um arquivo vazio para armazenar o banco de dados
 
----    touch database/database.sqlite
+>    touch database/database.sqlite
 
 7 - execute o comando para criar as tabelas e inserir dados dos seed e factory
 
----    php artisan migrate:fresh --seed
+>    php artisan migrate:fresh --seed
 
 8 - coloque o projeto para rodar
 
----    php artisan serve
+>    php artisan serve
