@@ -43,7 +43,7 @@
                             <ul class="list-group">
                             @foreach($umPost->likes as $umLike)
                                 <li class="list-group-item">
-                                    {{ $umLike->user->name }}
+                                <a href="/user/{{ $umLike->user->id }}" class="link-underline-light">{{ $umLike->user->name }}</a>
                                 </li>
                             @endforeach
                             </ul>
