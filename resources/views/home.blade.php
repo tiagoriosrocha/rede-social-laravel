@@ -9,10 +9,13 @@
                         {{ $umPost->user->name }}
                     </div>
                     <div class="card-body text-center">
-                        {{ $umPost->content }} 
+                        {{ $umPost->content }}
+                        <br>
+                        <span class="float-end"> 
                         <small class="text-muted">
                         {{\Carbon\Carbon::parse($umPost->created_at)->format('d/m/Y h:m')}}
                         </small>
+                        </span>
                     </div>
                     <div class="card-footer">
                         <p>

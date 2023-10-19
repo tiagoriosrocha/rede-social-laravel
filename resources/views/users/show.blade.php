@@ -7,7 +7,7 @@
                 <h1>
                     {{$user->name}}
                     
-                    @if($usuarioAutenticado->follows->contains($user))
+                    @if(!$usuarioAutenticado->follows->contains($user))
                         <button type="button" class="btn btn-outline-primary float-end">Seguir</button>
                     @else
                         <button type="button" class="btn btn-outline-danger float-end">Remover</button>
@@ -20,7 +20,12 @@
                 <h2>Posts <span class="badge bg-secondary float-end">{{ $user->posts->count() }}</span></h2> 
                 <ul class="list-group">
                     @foreach($user->posts as $post)
-                        <li class="list-group-item">{{$post->content}}</li>
+                        <li class="list-group-item">
+                            {{$post->content}} 
+                            <br> 
+                            <span class="float-start"><small>{{ \Carbon\Carbon::parse($post->created_at)->format('d/m/Y h:m') }}</small></span>
+                            <span class="float-end"><small>{{ $post->comments->count() }} comentários {{ $post->likes->count() }} curtidas</small></span>
+                        </li>
                     @endforeach
                 </ul>
             </div>

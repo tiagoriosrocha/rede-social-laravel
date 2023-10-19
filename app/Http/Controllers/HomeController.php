@@ -28,7 +28,11 @@ class HomeController extends Controller
         //recupera o ID do usuário que está logado
         $user_id = Auth::id();
         //recuperar o usuário com os seus posts
-        $user = User::where('id',$user_id)->with('posts', 'posts.comments', 'posts.comments.user', 'posts.likes', 'posts.likes.user')->first();
+        $user = User::where('id',$user_id)->with('posts', 
+                                                 'posts.comments', 
+                                                 'posts.comments.user', 
+                                                 'posts.likes', 
+                                                 'posts.likes.user')->first();
         //guarda os posts em uma variável chamada listaPosts
         $listaPosts = $user->posts()->get();
         //chama a view home e envia os posts
