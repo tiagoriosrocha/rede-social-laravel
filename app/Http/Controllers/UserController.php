@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $listaUsuarios = User::all()->sortBy('name');
+        $listaUsuarios = User::simplePaginate(5);
         $user_id = Auth::id();
         $usuarioAutenticado = User::where('id',$user_id)->with('follows')->first();
         return view('users.list', ['listaUsuarios' => $listaUsuarios, 'usuarioAutenticado' => $usuarioAutenticado]);
@@ -38,9 +38,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $user = User::where('id',$id)->with('posts', 'follows', 'followers')->first();
+        $user_id = Auth::id();
+        $usuarioAutenticado = User::where('id',$user_id)->with('follows')->first();
+        return view('users.show', ['user' => $user,'usuarioAutenticado' => $usuarioAutenticado]);
     }
 
     /**

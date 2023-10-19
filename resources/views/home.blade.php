@@ -24,7 +24,7 @@
                         <ul class="list-group">
                             @foreach($umPost->comments as $umComment)
                                 <li class="list-group-item">
-                                    <b>{{$umComment->user->name}}: </b> {{ $umComment->content }} 
+                                    <a href="/user/{{$umComment->user->id}}" class="link-underline-light"><b>{{$umComment->user->name}}:</b></a> {{ $umComment->content }} 
                                     <small class="text-muted">
                                         {{\Carbon\Carbon::parse($umComment->created_at)->format('d/m/Y h:m')}}
                                     </small>

@@ -16,6 +16,9 @@
                 </div>
             </div>
         @endforeach
+        <div class="col-md-12 text-center">
+            {{ $listaUsuarios->links() }}
+        </div>
     </div>
 </div>
 @endsection
