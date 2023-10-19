@@ -31,7 +31,11 @@
                 <h2>Seguidores <span class="badge bg-secondary float-end">{{ $user->followers->count() }}</span></h2>
                 <ul class="list-group">
                     @foreach($user->followers as $follower)
-                        <li class="list-group-item">{{$follower->name}}</li>
+                        <li class="list-group-item">
+                            <a href="/user/{{ $follower->id }}" class="link-underline-light">
+                                {{$follower->name}}
+                            </a>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -42,7 +46,11 @@
                 <h2>Seguindo <span class="badge bg-secondary float-end">{{ $user->follows->count() }}</span></h2>
                 <ul class="list-group">
                     @foreach($user->follows as $follows)
-                        <li class="list-group-item">{{$follows->name}}</li>
+                        <li class="list-group-item">
+                            <a href="/user/{{ $follows->id }}" class="link-underline-light">
+                                {{$follows->name}}
+                            </a>
+                        </li>
                     @endforeach
                 </ul>
             </div>
