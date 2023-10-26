@@ -1,7 +1,31 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+
+    <!-- EXIBE MENSAGENS DE SUCESSO -->
+    @if(\Session::has('success'))
+        <div class="row">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{\Session::get('success')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
     <div class="row justify-content-center">
+    <div class="col-md-8 col-md-offset-2">
+        <h5>Crie um novo Post:</h5>                
+        <form action="/post" method="POST">
+            @csrf
+            <div class="form-group">
+                <textarea class="form-control" name="content" rows="3" placeholder="Escreva um comentário"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Comentar</button>
+        </form>
+    </div>
+    </div>  
+
+    <div class="row justify-content-center mt-4">
         @foreach($listaPosts as $umPost)
             <div class="col-md-8 mb-4">
                 <div class="card">
