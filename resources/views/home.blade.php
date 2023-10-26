@@ -43,7 +43,7 @@
                         <br>
                         <span class="float-end"> 
                         <small class="text-muted">
-                        {{\Carbon\Carbon::parse($umPost->created_at)->format('d/m/Y h:m')}}
+                        {{\Carbon\Carbon::parse($umPost->created_at)->format('d/m/Y H:i:s')}}
                         </small>
                         </span>
                     </div>

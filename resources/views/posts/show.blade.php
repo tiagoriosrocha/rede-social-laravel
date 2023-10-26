@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="card mb-3 col-md-7">
             <div class="card-header">
-                {{$post->user->name}} - {{ \Carbon\Carbon::parse($post->created_at)->format('d/m/Y h:m') }} 
+                {{$post->user->name}} - {{ \Carbon\Carbon::parse($post->created_at)->format('d/m/Y H:i:s') }} 
             </div>
             <div class="card-body">
                 <h4>
@@ -25,7 +25,7 @@
                     <h4>Comentários: {{$post->comments->count()}}</h4>
                     <ol class="group-list list-group-numbered">
                     @foreach($post->comments as $comentario)
-                        <li class="list-group-item"><b><a href="/user/{{ $comentario->user->id }}" class="link-underline-light">{{$comentario->user->name}}</a></b> {{ $comentario->content }} <small>{{ \Carbon\Carbon::parse($comentario->created_at)->format('d/m/Y h:m') }}</small></li>
+                        <li class="list-group-item"><b><a href="/user/{{ $comentario->user->id }}" class="link-underline-light">{{$comentario->user->name}}</a></b> {{ $comentario->content }} <small>{{ \Carbon\Carbon::parse($comentario->created_at)->format('d/m/Y H:i:s') }}</small></li>
                     @endforeach
                     </ol>
                 </h4>
