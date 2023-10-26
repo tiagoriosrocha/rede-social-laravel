@@ -30,3 +30,4 @@ Route::get('unfollow/{id}', [App\Http\Controllers\UserController::class, 'unfoll
 Route::get('/like/{id}', [App\Http\Controllers\PostController::class, 'like']);
 Route::get('/deslike/{id}', [App\Http\Controllers\PostController::class, 'deslike']);
 
+Route::post('/comment', [App\Http\Controllers\CommentController::class, 'create']);

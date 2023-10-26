@@ -29,6 +29,17 @@
                     @endforeach
                     </ol>
                 </h4>
+                
+                <br>
+                <h5>Novo Comentário:</h5>
+                <form action="/comment" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                        <textarea class="form-control" name="content" rows="3" placeholder="Escreva um comentário"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Comentar</button>
+                </form>
             </div>
         </div>
 
