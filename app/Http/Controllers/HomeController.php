@@ -35,6 +35,7 @@ class HomeController extends Controller
                                                  'posts.likes.user')->first();
         //guarda os posts em uma variável chamada listaPosts
         $listaPosts = $user->posts()->get();
+        
         //chama a view home e envia os posts
         return view('home',['listaPosts' => $listaPosts]);
     }
