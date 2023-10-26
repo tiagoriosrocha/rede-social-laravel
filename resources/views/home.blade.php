@@ -14,14 +14,18 @@
 
     <div class="row justify-content-center">
     <div class="col-md-8 col-md-offset-2">
+        <div class="card">
+            <div class="card-body">
         <h5>Crie um novo Post:</h5>                
         <form action="/post" method="POST">
             @csrf
             <div class="form-group">
                 <textarea class="form-control" name="content" rows="3" placeholder="Escreva um comentário"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Comentar</button>
+            <button type="submit" class="btn btn-primary mt-2 float-end">Salvar</button>
         </form>
+</div>
+        </div>
     </div>
     </div>  
 
@@ -41,7 +45,9 @@
                         </small>
                         </span>
                     </div>
+                    @if($umPost->likes->count() > 0 || $umPost->comments->count() > 0)
                     <div class="card-footer">
+                        @if($umPost->comments->count() > 0)
                         <p>
                             Comentários: 
                             <span class="badge rounded-pill bg-primary">
@@ -58,8 +64,9 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <br>
-                        <p>
+                        @endif
+                        @if($umPost->likes->count() > 0)
+                        <p class="mt-2">
                             Likes:
                             <span class="badge rounded-pill bg-primary">
                             {{ $umPost->likes->count() }}
@@ -72,7 +79,9 @@
                             @endforeach
                             </ul>
                         </p>
+                        @endif
                     </div>
+                    @endif
                 </div>
             </div>
         @endforeach
