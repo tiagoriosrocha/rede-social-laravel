@@ -27,21 +27,6 @@ class UserController extends Controller
                                    'usuarioAutenticado' => $usuarioAutenticado]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -60,27 +45,21 @@ class UserController extends Controller
         return view('users.show', ['user' => $user,'usuarioAutenticado' => $usuarioAutenticado]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
+    public function follow($id){
+        $usuarioParaSeguir = User::find($id);
+        $usuarioLogado = Auth::user();
+
+        $usuarioLogado->follows()->attach($usuarioParaSeguir);
+
+        return redirect()->back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
+    public function unfollow($id){
+        $usuarioParaNaoSeguir = User::find($id);
+        $usuarioLogado = Auth::user();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
+        $usuarioLogado->follows()->detach($usuarioParaNaoSeguir);
+
+        return redirect()->back();
     }
 }

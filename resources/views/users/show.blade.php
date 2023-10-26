@@ -8,9 +8,9 @@
                     {{$user->name}}
                     
                     @if(!$usuarioAutenticado->follows->contains($user))
-                        <button type="button" class="btn btn-outline-primary float-end">Seguir</button>
+                        <a href="/follow/{{ $user->id }}" class="btn btn-outline-primary float-end">Seguir</a>
                     @else
-                        <button type="button" class="btn btn-outline-danger float-end">Remover</button>
+                        <a href="/unfollow/{{ $user->id }}" class="btn btn-outline-danger float-end">Remover</a>
                     @endif
                 </h1>
             </div>
