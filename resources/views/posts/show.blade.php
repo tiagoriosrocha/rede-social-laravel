@@ -11,10 +11,10 @@
                     
                     {{$post->content}}
                     
-                    @if(!$post->likes->contains($user))
-                        <button type="button" class="btn btn-outline-primary">Curtir</button>
+                    @if(!$post->likes->contains('user_id',$user->id))
+                        <a href="/like/{{ $post->id }}" type="button" class="btn btn-outline-primary">Curtir</a>
                     @else
-                        <button type="button" class="btn btn-outline-danger">Descurtir</button>
+                        <a href="/deslike/{{ $post->id }}" type="button" class="btn btn-outline-danger">Descurtir</a>
                     @endif
                 </h4>
             </div>

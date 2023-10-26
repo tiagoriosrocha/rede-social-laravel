@@ -13,4 +13,22 @@ class PostController extends Controller
         $user = Auth::user();
         return view('posts.show',['post' => $post, 'user' => $user]);
     }
+
+    public function like($id){
+        $post = Post::find($id);
+        $usuarioLogado = Auth::user();
+
+        $usuarioLogado->likedPosts()->attach($post);
+
+        return redirect()->back();
+    }
+
+    public function deslike($id){
+        $post = Post::find($id);
+        $usuarioLogado = Auth::user();
+
+        $usuarioLogado->likedPosts()->detach($post);
+
+        return redirect()->back();
+    }
 }

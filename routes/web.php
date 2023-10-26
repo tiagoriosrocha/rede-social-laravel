@@ -23,5 +23,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show']);
 Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show']);
+
 Route::get('follow/{id}', [App\Http\Controllers\UserController::class, 'follow']);
 Route::get('unfollow/{id}', [App\Http\Controllers\UserController::class, 'unfollow']);
+
+Route::get('/like/{id}', [App\Http\Controllers\PostController::class, 'like']);
+Route::get('/deslike/{id}', [App\Http\Controllers\PostController::class, 'deslike']);
+
