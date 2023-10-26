@@ -35,6 +35,8 @@
                 <div class="card">
                     <div class="card-header">
                         {{ $umPost->user->name }}
+                        <a href="/post/{{ $umPost->id }}/destroy" class="btn btn-outline-danger btn-sm float-end">Deletar</a> 
+                        <!-- <a href="/post/{{ $umPost->id }}/edit" class="btn btn-outline-warning btn-sm float-end me-2">Editar</a> -->
                     </div>
                     <div class="card-body text-center">
                         {{ $umPost->content }}
@@ -87,4 +89,5 @@
         @endforeach
     </div>
 </div>
+
 @endsection
