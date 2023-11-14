@@ -32,7 +32,9 @@ class HomeController extends Controller
                                                  'posts.comments', 
                                                  'posts.comments.user', 
                                                  'posts.likes', 
-                                                 'posts.likes.user')->first();
+                                                 'posts.likes.user',
+                                                 'posts.photos')->first();
+        //dd($user);
         //guarda os posts em uma variável chamada listaPosts
         $listaPosts = $user->posts()->orderBy('created_at','desc')->get();
         

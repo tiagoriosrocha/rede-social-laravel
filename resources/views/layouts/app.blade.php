@@ -15,6 +15,11 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <!-- dropzone/dist/min/dropzone.min.css
+    dropzone/dist/min/dropzone.min.js -->
+    
+    @yield('head')
 </head>
 <body>
     <div id="app">
@@ -83,5 +88,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('javascript')
 </body>
 </html>

@@ -20,6 +20,14 @@
             </div>
         </div>
 
+        @if($post->photos->count() > 0)
+        <div class="card mb-3 col-md-7">
+            <div class="card-body">
+                <img src="/storage/image/{{ $post->photos[0]->image_path }}" class="rounded img-fluid float-none">   
+            </div>
+        </div>
+        @endif
+
         <div class="card mb-3 col-md-7">
             <div class="card-body">
                     <h4>Comentários: {{$post->comments->count()}}</h4>

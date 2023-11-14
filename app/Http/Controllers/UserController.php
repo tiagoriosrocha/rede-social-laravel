@@ -11,10 +11,20 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
+    //demonstração nos slides
     // public function index()
     // {
-    //     $listaUsuarios = User::all();
+    //     $listaUsuarios = User::simplePaginate(5);
     //     return view('users.list', ['listaUsuarios' => $listaUsuarios]);
+    // }
+
+    //demonstração nos slides
+    // public function index()
+    // {
+    //     $user_id = Auth::id();
+    //     $usuarioAutenticado = User::where('id',$user_id)->with('follows')->first();
+    //     return view('users.list', ['usuarioAutenticado' => $usuarioAutenticado]);
     // }
     
     

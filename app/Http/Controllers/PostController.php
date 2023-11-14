@@ -4,22 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Post;
+use \App\Models\Photo;
 use Illuminate\Support\Facades\Auth;
 use \Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
     public function show($id){
-        $post = Post::where('id', $id)->with('comments','comments.user','likes','likes.user')->first();
+        $post = Post::where('id', $id)->with('comments',
+                                             'comments.user',
+                                             'likes',
+                                             'likes.user',
+                                             'photos')->first();
         $user = Auth::user();
         return view('posts.show',['post' => $post, 'user' => $user]);
     }
 
+    // demonstração dos slides
+    // public function show($id){
+    //     $post = Post::where('id', $id)->with('user')->first();
+    //     $user = Auth::user();
+    //     return view('posts.show',['post' => $post, 'user' => $user]);
+    // }
+
     public function create(Request $request){
+        
         //vetor com as mensagens de erro
         $messages = array(
             'content.required' => 'É obrigatório um conteúdo para o post',
-            'content.max' => 'Seu post tem que ter no máximo 255 caracteres'
+            'content.max' => 'Seu post tem que ter no máximo 255 caracteres',
         );
 
         //vetor com as especificações de validações
@@ -37,13 +51,23 @@ class PostController extends Controller
             ->withInput($request->all);
         }
 
+        $image = $request->file('file');
+        $imageName = time().'.'.$image->extension();
+        $image->move(public_path('storage/image/'),$imageName);
+
         //se passou pelas validações, processa e salva no banco...
         $post = new Post();
         $post->content = $request['content'];
         $post->user_id = Auth::id();
         $post->save();
 
-        return redirect()->back()->with('success','Post cadastrado com sucesso!');
+        $foto = new Photo();
+        $foto->image_path = $imageName;
+        $foto->post_id = $post->id;
+        $foto->save();
+
+        return redirect('home')->with('success','Post cadastrado com sucesso!');
+        //return response()->json(['success'=>$imageName]);
     }
 
     public function like($id){
