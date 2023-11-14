@@ -26,7 +26,7 @@
                             {{$post->content}} 
                             <br> 
                             <span class="float-end"><small>{{ \Carbon\Carbon::parse($post->created_at)->format('d/m/Y H:i:s') }}</small></span>
-                            <span class="float-start"><small>{{ $post->comments->count() }} comentários {{ $post->likes->count() }} curtidas</small></span>
+                            <span class="float-start"><small>{{ $post->comments->count() }} comentários {{ $post->likes->count() }} curtidas @if($post->photos->count() > 0) {{ $post->photos->count() }} imagem @endif</small></span>
                             <br>
                             <span class="float-end"><small><a href="/post/{{$post->id}}">ver mais</a></small></span>
                         </li>

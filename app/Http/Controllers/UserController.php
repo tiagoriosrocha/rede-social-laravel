@@ -47,7 +47,8 @@ class UserController extends Controller
                                             'posts.comments', 
                                             'posts.comments.user', 
                                             'posts.likes', 
-                                            'posts.likes.user', 
+                                            'posts.likes.user',
+                                            'posts.photos',
                                             'follows', 
                                             'followers')->first();
         $user_id = Auth::id();
