@@ -108,7 +108,7 @@
         <h5>Crie um novo Post:</h5>                
         <form method="POST" action="/post" class="dropzone overflow-visible p-0" id="formDropzone" enctype="multipart/form-data" novalidate>
             @csrf
-            <input hidden id="file" name="file"/>
+            <input hidden id="file" name="file" multiple="multiple" />
             <div class="form-group">
                 <textarea class="form-control" name="content" rows="3" placeholder="Escreva um comentário"></textarea>
             </div>
@@ -158,7 +158,10 @@
                     </div>
                     <div class="card-body text-center">
                     @if($umPost->photos->count() > 0)
-                        <img src="/storage/image/{{ $umPost->photos[0]->image_path }}" with="100px" height="100px" class="rounded float-start">
+                        <img src="/storage/image/{{ $umPost->photos[0]->image_path }}" 
+                             with="100px" 
+                             height="100px" 
+                             class="rounded float-start">
                     @endif
                         {{ $umPost->content }}
                     </div>
@@ -220,9 +223,9 @@
                 url: '/post',
                 addRemoveLinks: true,
                 autoProcessQueue: false,       
-                uploadMultiple: false,
-                parallelUploads: 1,
-                maxFiles: 1,
+                uploadMultiple: true,
+                parallelUploads: 3,
+                maxFiles: 3,
                 acceptedFiles: '.jpeg, .jpg, .png, .gif',
                 thumbnailWidth: 900,
                 thumbnailHeight: 600,

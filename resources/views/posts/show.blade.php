@@ -20,10 +20,32 @@
             </div>
         </div>
 
-        @if($post->photos->count() > 0)
+        <!-- @if($post->photos->count() > 0)
         <div class="card mb-3 col-md-7">
             <div class="card-body">
                 <img src="/storage/image/{{ $post->photos[0]->image_path }}" class="rounded img-fluid float-none">   
+            </div>
+        </div>
+        @endif -->
+
+        @if($post->photos->count() > 0)
+        <div class="card mb-3 col-md-7">
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    @for($i=0; $i<count($post->photos); $i++)
+                    <div class="carousel-item @if($i==0) active @endif">
+                        <img src="/storage/image/{{ $post->photos[$i]->image_path }}" class="d-block w-50" />   
+                    </div>
+                    @endfor
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
         @endif

@@ -42,3 +42,6 @@ class HomeController extends Controller
         return view('home',['listaPosts' => $listaPosts]);
     }
 }
+
+
+//editar comentário, excluir comentário, permitir fazer upload de mais fotos

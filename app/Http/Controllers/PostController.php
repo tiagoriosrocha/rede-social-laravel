@@ -30,6 +30,8 @@ class PostController extends Controller
 
     public function create(Request $request){
         
+        Log::info($request);
+
         //vetor com as mensagens de erro
         $messages = array(
             'content.required' => 'É obrigatório um conteúdo para o post',
@@ -51,20 +53,28 @@ class PostController extends Controller
             ->withInput($request->all);
         }
 
-        $image = $request->file('file');
-        $imageName = time().'.'.$image->extension();
-        $image->move(public_path('storage/image/'),$imageName);
-
         //se passou pelas validações, processa e salva no banco...
         $post = new Post();
         $post->content = $request['content'];
         $post->user_id = Auth::id();
         $post->save();
 
-        $foto = new Photo();
-        $foto->image_path = $imageName;
-        $foto->post_id = $post->id;
-        $foto->save();
+        $arquivos = $request['file'];
+        Log::info("quantidade: " . count($arquivos));
+
+        for($i=0; $i < count($arquivos); $i++){
+            $image = $arquivos[$i];
+            Log::info($image);
+            $imageName = time(). '_' . $i .'.'.$image->extension();
+            Log::info("nome: " . $imageName);
+            $image->move(public_path('storage/image/'),$imageName);
+            Log::info("movimentou");
+
+            $foto = new Photo();
+            $foto->image_path = $imageName;
+            $foto->post_id = $post->id;
+            $foto->save();
+        }
 
         return redirect('home')->with('success','Post cadastrado com sucesso!');
         //return response()->json(['success'=>$imageName]);
