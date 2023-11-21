@@ -12,12 +12,12 @@
                 background: transparent;
             }
             .dz-preview {
-                width: 100px;
+                width: 70px;
                 margin: 0 !important;
                 height: 50px;
-                padding: 15px;
-                position: absolute !important;
-                top: 0;
+                padding: 5px;
+                position: relative !important;
+                top: -110px;
             }
             .dz-photo {
                 height: 100%;
@@ -74,7 +74,7 @@
                 justify-content: center;
             }
             .dropzone-drag-area {
-                height: 100px;
+                height: 120px;
                 position: relative;
                 padding: 0 !important;
                 border-radius: 10px;
@@ -106,35 +106,43 @@
         <div class="card">
             <div class="card-body">
         <h5>Crie um novo Post:</h5>                
-        <form method="POST" action="/post" class="dropzone overflow-visible p-0" id="formDropzone" enctype="multipart/form-data" novalidate>
+        <form method="POST" action="/post" class="overflow-visible p-0" id="formDropzone" enctype="multipart/form-data" novalidate>
             @csrf
             <input hidden id="file" name="file" multiple="multiple" />
             <div class="form-group">
+                <label class="form-label text-muted opacity-75 fw-medium" for="content">
+                            Texto:
+                        </label>    
                 <textarea class="form-control" name="content" rows="3" placeholder="Escreva um comentário"></textarea>
             </div>
             <div class="form-group mb-4">
-                        <label class="form-label text-muted opacity-75 fw-medium" for="formImage">Image</label>
-                        <div class="dropzone-drag-area form-control" id="previews">
-                            <div class="dz-message text-muted opacity-50" data-dz-message>
-                                <span>Arraste e solte suas imagens!</span>
-                            </div>    
+                        <label class="form-label text-muted opacity-75 fw-medium" for="formImage">
+                            Image
+                        </label>
+                        <div class="dropzone dropzone-drag-area form-control" id="previews">      
                             <div class="d-none" id="dzPreviewContainer">
                                 <div class="dz-preview dz-file-preview">
                                     <div class="dz-photo">
-                                        <img class="dz-thumbnail" data-dz-thumbnail>
+                                        <img class="dz-thumbnail" data-dz-thumbnail />
                                     </div>
+                                    
                                     <button class="dz-delete border-0 p-0" type="button" data-dz-remove>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="times"><path fill="#FFFFFF" d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"></path></svg>
                                     </button>
                                 </div>
                             </div>
+                        
+                            <div class="dz-message text-muted opacity-50" data-dz-message>
+                                <span>Arraste e solte suas imagens!</span>
+                            </div> 
                         </div>
-                        <div class="invalid-feedback fw-bold">Please upload an image.</div>
-                    </div>
-                    <button class="btn btn-primary fw-medium py-3 px-4 mt-3" id="formSubmit" type="submit">
+            </div>
+            <div class="form-group mb-4">      
+                    <button class="btn btn-primary fw-medium py-3 px-4 mt-3 float-end" id="formSubmit" type="submit">
                         <span class="spinner-border spinner-border-sm d-none me-2" aria-hidden="true"></span>
                         Salvar
                     </button>
+            </div>
         </form>
 </div>
         </div>
@@ -142,40 +150,68 @@
     </div>  
 
     <div class="row justify-content-center mt-4">
-        @foreach($listaPosts as $umPost)
+        @for($i=0; $i< count($listaPosts); $i++)
             <div class="col-md-8 mb-4">
                 <div class="card">
                     <div class="card-header">
-                        {{ $umPost->user->name }}
+                        {{ $listaPosts[$i]->user->name }}
                         <span class="float-end">
                             <small class="text-muted">
-                                {{\Carbon\Carbon::parse($umPost->created_at)->format('d/m/Y H:i:s')}}
+                                {{\Carbon\Carbon::parse($listaPosts[$i]->created_at)->format('d/m/Y H:i:s')}}
                             </small>
-                            <a href="/post/{{ $umPost->id }}" class="btn btn-outline-primary btn-sm">Detalhes</a>  
-                            <a href="/post/{{ $umPost->id }}/destroy" class="btn btn-outline-danger btn-sm">Deletar</a>
+                            <a href="/post/{{ $listaPosts[$i]->id }}" class="btn btn-outline-primary btn-sm">Detalhes</a>  
+                            <a href="/post/{{ $listaPosts[$i]->id }}/destroy" class="btn btn-outline-danger btn-sm">Deletar</a>
                         </span>
-                        <!-- <a href="/post/{{ $umPost->id }}/edit" class="btn btn-outline-warning btn-sm float-end me-2">Editar</a> -->
                     </div>
-                    <div class="card-body text-center">
-                    @if($umPost->photos->count() > 0)
-                        <img src="/storage/image/{{ $umPost->photos[0]->image_path }}" 
-                             with="100px" 
-                             height="100px" 
-                             class="rounded float-start">
+                    <div class="card-body">
+
+                    @if($listaPosts[$i]->photos->count() > 0)
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12">
+                            <div id="carousel_{{ $i }}" class="carousel slide">
+                                <div class="carousel-inner">
+                                    @for($j=0; $j<count($listaPosts[$i]->photos); $j++)
+                                    <div class="carousel-item @if($j==0) active @endif">
+                                        <img src="/storage/image/{{ $listaPosts[$i]->photos[$j]->image_path }}" width="160px" height="150px" />   
+                                    </div>
+                                    @endfor
+                                </div>
+                                @if($listaPosts[$i]->photos->count() > 1)
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel_{{ $i }}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel_{{ $i }}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <span classs="position-absolute bottom-50 end-50">{{ $listaPosts[$i]->content }}</span>
+                        </div>
+                    </div>
+                    @else
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                        <span classs="position-absolute bottom-50 end-50">{{ $listaPosts[$i]->content }}</span>
+                        </div>
+                    </div>
                     @endif
-                        {{ $umPost->content }}
+                    
                     </div>
-                    @if($umPost->likes->count() > 0 || $umPost->comments->count() > 0)
+                    @if($listaPosts[$i]->likes->count() > 0 || $listaPosts[$i]->comments->count() > 0)
                     <div class="card-footer">
-                        @if($umPost->comments->count() > 0)
+                        @if($listaPosts[$i]->comments->count() > 0)
                         <p>
                             Comentários: 
                             <span class="badge rounded-pill bg-primary">
-                            {{ $umPost->comments->count() }}
+                            {{ $listaPosts[$i]->comments->count() }}
                             </span>
                         </p>
                         <ul class="list-group">
-                            @foreach($umPost->comments as $umComment)
+                            @foreach($listaPosts[$i]->comments as $umComment)
                                 <li class="list-group-item">
                                     <a href="/user/{{$umComment->user->id}}" class="link-underline-light"><b>{{$umComment->user->name}}:</b></a> {{ $umComment->content }} 
                                     <small class="text-muted">
@@ -185,14 +221,14 @@
                             @endforeach
                         </ul>
                         @endif
-                        @if($umPost->likes->count() > 0)
+                        @if($listaPosts[$i]->likes->count() > 0)
                         <p class="mt-2">
                             Likes:
                             <span class="badge rounded-pill bg-primary">
-                            {{ $umPost->likes->count() }}
+                            {{ $listaPosts[$i]->likes->count() }}
                             </span>
                             <ul class="list-group">
-                            @foreach($umPost->likes as $umLike)
+                            @foreach($listaPosts[$i]->likes as $umLike)
                                 <li class="list-group-item">
                                 <a href="/user/{{ $umLike->user->id }}" class="link-underline-light">{{ $umLike->user->name }}</a>
                                 </li>
@@ -204,7 +240,7 @@
                     @endif
                 </div>
             </div>
-        @endforeach
+        @endfor
     </div>
 </div>
 @endsection
